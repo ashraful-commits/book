@@ -167,14 +167,12 @@ export const uploadphotopage = async (req, res) => {
 //===========================================gallery upload
 export const gallerypageUpload = async (req, res) => {
   try {
-    const data = '';
     for (let i = 0; i < req.files.length; i++) {
       await useModel.findByIdAndUpdate(req.session.user._id, {
         $push: {
           gallery: req.files[i].filename,
         },
       });
-      req.session.user.gallery = gallery;
     }
 
     validator('Gallary upload successfull', '/gallery', req, res);
@@ -187,8 +185,9 @@ export const passwordpageChange = async (req, res) => {
   try {
     const { old_pass, new_pass, confirm_pass } = req.body;
     if (!old_pass || !new_pass || !confirm_pass) {
-      validator('All fields are Required', 'password', req, res);
+      validator('All fields are Required', '/password', req, res);
     } else {
+      console.log(req.body);
       if (new_pass == confirm_pass) {
         const user = req.session.user;
         const checkPass = passwordComp(old_pass, user.password);
@@ -196,6 +195,7 @@ export const passwordpageChange = async (req, res) => {
           await useModel.findByIdAndUpdate(user._id, {
             password: await makeHash(new_pass),
           });
+          res.clearCookie('authToken');
           validator('Upadated password', '/login', req, res);
         } else {
           validator('Not your password', '/password', req, res);
@@ -214,4 +214,26 @@ export const passwordpageChange = async (req, res) => {
   }
 };
 //========================================== editpagepost
-export const editpagepost = (req, res) => {};
+export const editpagepost = async (req, res) => {
+  try {
+    const { name, email, username, cell, location, gender } =
+      req.body;
+    console.log(req.body);
+
+    const user = req.session.user;
+
+    const updata = await useModel.findByIdAndUpdate(user._id, {
+      name,
+      email,
+      username,
+      cell,
+      location,
+      gender,
+    });
+    res.clearCookie('authToken');
+    req.session.user = updata;
+    validator('updated Succesfull', '/login', req, res);
+  } catch (error) {
+    validator(error.message, '/edit', req, res);
+  }
+};

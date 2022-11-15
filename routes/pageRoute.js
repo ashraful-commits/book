@@ -27,18 +27,18 @@ export const router = express.Router();
  * cover page
  *  */
 
-router.get('/', authTokenVerify, homePage);
-router.get('/login', loginpage);
+router.get('/', loginUserRedicet, homePage);
+router.get('/login', authTokenVerify, loginpage);
 router.post('/login', loginForm);
-router.get('/signup', signuppage);
+router.get('/signup', authTokenVerify, signuppage);
 router.post('/signup', signupForm);
-router.get('/photo', photopage);
+router.get('/photo', loginUserRedicet, photopage);
 router.post('/photo', photoMulter, uploadphotopage);
-router.get('/gallery', gallerypage);
+router.get('/gallery', loginUserRedicet, gallerypage);
 router.post('/gallery', galleryPhoto, gallerypageUpload);
-router.get('/edit', editpage);
-router.post('/edit', editpagepost);
-router.get('/password', passwordpage);
+router.get('/edit', loginUserRedicet, editpage);
+router.post('/edit', loginUserRedicet, editpagepost);
+router.get('/password', loginUserRedicet, passwordpage);
 router.post('/password', passwordpageChange);
 router.get('/active/:token', activeAccount);
 router.get('/logout', logoutAction);
