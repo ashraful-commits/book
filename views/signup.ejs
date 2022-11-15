@@ -1,0 +1,35 @@
+<div class="container w-full h-96 bg-gray-200 flex">
+    <div class="h-full w-1/12 hover:w-6/12 transition-all bg-amber-600">
+       <%- include("layouts/menu.ejs")  %> 
+    </div>
+    <div class="h-full w-full">
+        <form action="/signup" method="post" class="w-full h-full  px-3 bg-white">
+            <div class="text-center my-1">
+                <% if (message) { %>
+                 <p class="w-full border-2 font-bold placeholder-amber-900 focus:outline-none px-3 my-1 py-1 border-amber-500"><%= message %> </p>
+                 <% } else { %>
+                    <h1 class="text-xl font-bold">Signup Form</h1>
+                <% } %>
+              
+            </div>
+            <input type="text" name="name" class=" w-full border-2 font-bold placeholder-amber-900 focus:outline-none px-3 my-1 py-1 border-amber-500" placeholder="Name" id="">
+            <input type="text" name="username" class=" w-full border-2 font-bold placeholder-amber-900 focus:outline-none px-3 my-1 py-1 border-amber-500" placeholder="Username" id="">
+            <input type="password" name="password" class=" w-full border-2 font-bold placeholder-amber-900 focus:outline-none px-3 my-1 py-1 border-amber-500" placeholder="Password" id="">
+            <input type="email" name="email" class=" w-full border-2 font-bold placeholder-amber-900 focus:outline-none px-3 my-1 py-1 border-amber-500" placeholder="Email" id="">
+            <input type="number" name="cell" class=" w-full border-2 font-bold placeholder-amber-900 focus:outline-none px-3 my-1 py-1 border-amber-500" placeholder="Mobile Number" id="">
+            <select name="location" id="" class=" w-full border-2 font-bold placeholder-amber-900 focus:outline-none px-3 my-1 py-1 border-amber-500">
+                <option value="location">location</option>
+                <option value="Mirpur">Mirpur</option>
+                <option value="Badda">Badda</option>
+                <option value="Uttara">Uttara</option>
+                <option value="Bonani">Bonani</option>
+            </select>
+            <select name="gender" id="" class=" w-full border-2 font-bold placeholder-amber-900 focus:outline-none px-3 my-1 py-1 border-amber-500">
+                <option value="Gender">Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            <button type="submit" class=" w-full font-bold uppercase focus:outline-none px-3 py-1 hover:bg-white text-white hover:text-amber-900 my-2 bg-amber-700">Signup</button>
+        </form>
+    </div>
+    </div>

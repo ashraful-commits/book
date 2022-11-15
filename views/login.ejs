@@ -1,0 +1,25 @@
+<div class="container w-full h-96 bg-gray-200 flex">
+<div class="h-full w-1/12 hover:w-6/12 transition-all bg-amber-600">
+   <%- include("layouts/menu.ejs")  %> 
+</div>
+<div class="h-full w-full">
+    <form action="/login" method="post" class="w-full h-full  px-3 bg-white flex justify-center items-center">
+        <div>
+        <div class="text-center my-2">
+            <% if (message) { %>
+                <p class="w-full border-2 font-bold placeholder-amber-900 focus:outline-none px-3 my-1 py-1 border-amber-500"><%= message %> </p>
+                <% } else { %>
+                    <h1 class="text-xl font-bold">Login Form</h1>
+               <% } %>
+            
+        </div>
+        <input type="email" name="email" class=" w-full border-2 focus:outline-none px-3 py-2 my-2 border-amber-500" placeholder="email" id="">
+        <input type="password" name="password" class=" w-full border-2 focus:outline-none px-3 py-2 my-2 border-amber-500" placeholder="Password" id="">
+       
+       <div><a href="" class="text-sky-500">Forget password</a></div>
+        <button type="submit" class=" w-full border-2 focus:outline-none px-3 py-2 hover:bg-white hover:text-amber-900 font-bold uppercase text-white my-2 bg-amber-500">Login</button>
+        <div class="text-center"><span>Not a member? </span><a href="/signup" class="text-sky-500">SignUp</a></div>
+    </div>
+    </form>
+</div>
+</div>

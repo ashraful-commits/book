@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <title>Book</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+   <div class="container bg-gray-200 p-2 m-auto">
+   <div class="main-container w-4/12 m-auto  bg-[url('https://img.freepik.com/free-vector/network-connection-background_23-2148879892.jpg')] bg-cover shadow-3xl mt-4   ">
+      <div class="w-full h-8 bg-amber-400 " ></div>
+      <div class="main w-32 h-36 bg-amber-400 m-auto rounded-b-full mb-3  flex flex-col overflow-hidden items-center ">
+         <div class="rounded-full mt-4 border-4 border-black">
+             <!-- //========================profile image ========================// -->
+            <% if (user) { %>
+               <img src="/gallery/<%= user.photo %> " class="w-28 m-auto bg-cover h-28 rounded-full" alt="">
+               <% } else { %>
+                  <img src="https://cdn-icons-png.flaticon.com/512/219/219983.png" class="w-28  m-auto  h-28 rounded-full" alt="">
+            <% } %>
+         </div>
+     </div>
+      <!-- //==================================== round shap========================================// -->
+   <%- body  %> 
+      <div class="w-full h-8 bg-amber-600 " ></div>
+  </div>
+</div>
+
+<script>
+
+
+if(document.getElementById('proPhoto')){
+   const proPhoto = document.getElementById('proPhoto')
+   const preview_photo = document.querySelector('.preview_photo')
+   proPhoto.onchange = (e)=>{
+      const url = URL.createObjectURL(e.target.files[0])
+      preview_photo.setAttribute('src',url)
+   }
+}else{
+   
+   const gallPhoto = document.getElementById('gallPhoto')
+  gallPhoto.onchange = (e)=>{
+   const files = e.target.files
+   const gallery_view = document.querySelector('.gallery_view')
+   let galPhoto = ''
+   for(let i = 0;i<files.length;i++){
+      const url =URL.createObjectURL(files[i])
+     galPhoto+= `<div class="w-3/12 h-20 mx-1 my-2">
+            <img src="${url}" alt="">
+         </div>`
+   }
+   gallery_view.innerHTML = galPhoto
+  }
+}
+  
+
+
+  
+   
+</script>
+</body>
+</html>

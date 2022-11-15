@@ -1,0 +1,23 @@
+<div class="container w-full h-96 bg-gray-200 flex">
+    <div class="h-full w-1/12 hover:w-6/12 transition-all bg-amber-600">
+       <%- include("layouts/menu.ejs")  %> 
+    </div> 
+    <div class="h-full w-full bg-white text-center p-3 ">
+        <% if (message) { %>
+            <p class="w-full border-2 font-bold placeholder-amber-900 focus:outline-none px-3  border-amber-500"><%= message %> </p>
+            <% } else { %>
+                <h1 class="text-xl font-bold">Upload Profile Photo</h1>
+           <% } %>
+        <form action="/photo" method="post" class="flex flex-col items-center justify-center" enctype="multipart/form-data">
+            <img class=" h-56 border-4 border-amber-500 mx-5 my-3 preview_photo" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="">
+        <label for="proPhoto">
+            <img class="w-8 h-8 "  src="https://customercare.igloosoftware.com/.api2/api/v1/communities/10068556/previews/thumbnails/4fc20722-5368-e911-80d5-b82a72db46f2?width=680&height=680&crop=False"  alt="">
+        </label>
+            <input style="display: none;" type="file"  name="photo"  id="proPhoto">
+            
+            <button type="submit"  class="  w-full focus:outline-none px-3 py-2 hover:bg-white hover:text-amber-900 font-bold uppercase text-white my-2 bg-amber-500">Change</button>
+        </form>
+    </div>
+
+    </div>
+    

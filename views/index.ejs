@@ -1,0 +1,31 @@
+
+
+
+
+<div class="w-full h-auto mt-20 text-center">
+    <% if (user) { %>
+        <h1 class="text-white font-bold text-xl my-2 "> <i class="fas fa-user"></i> <%= user.name %> </h1>
+        <% } else { %>
+            <h1 class="text-white font-bold text-xl my-2 "> <i class="fas fa-user"></i> Mohammad Ashraful Alam </h1>
+    <% } %>
+    <% if (user) { %>
+        <p class="text-white font-bold text-sm my-2 "> <i class="fas fa-envelope"></i>   <%= user.email %> </p>
+        <% } else { %>
+            <p class="text-white font-bold text-sm my-2 "> <i class="fas fa-envelope"></i>   ashrafulalam100000@gmail.com </p>
+    <% } %>
+   <% if (user) { %>
+    <p class="text-white font-bold text-sm my-2"> <i class="fas fa-phone"></i>  <%= user.cell %> </p>
+    <% } else { %>
+        <p class="text-white font-bold text-sm my-2"> <i class="fas fa-phone"></i> 01955127330<%= user.cell %> </p>
+   <% } %>
+   <% if (user) { %>
+    <p class="text-white font-bold text-sm my-2"> <i class="fa-solid fa-street-view"></i> <%= user.location %> , Dhaka</p>
+    <% } else { %>
+        <p class="text-white font-bold text-sm my-2"> <i class="fa-solid fa-street-view"></i> Mirpur , Dhaka</p>
+   <% } %>
+ 
+    
+</div>
+<div class="mt-10 mb-32 text-center">
+    <a class="w-32 px-10 py-5 h-12 text-white bg-amber-400 hover:bg-white hover:text-purple-900 font-bold rounded-md" href="/photo">photo</a>
+</div>
