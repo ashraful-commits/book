@@ -41,17 +41,21 @@
                 <p class="text-lg bg-black text-white my-2 text-center">Gallery</p>
                 
                 <div class="flex flex-wrap justify-center">
-                    <% profile.gallery.forEach(element => { %>
-                     <% if (element) { %>
-                        <div class="my-1 mx-1">
-                            <img class="w-16 h-16 border-2 border-amber-400" src="/gallery/<%= element %> " alt="">
-                         </div>
-                        <% } else { %>
-                            <div class="my-1 mx-1">
-                               <p>Gallery Photo Not Found</p>
-                             </div>
-                     <% } %>
-                    <% }) %>
+                    
+                        <% profile.gallery.forEach(element => { %>
+                            <% if (element) { %>
+                                <div class="my-1 mx-1">
+                                    <img class="w-16 h-16 border-2 border-amber-400" src="/gallery/<%= element %> " alt="">
+                                 </div>   
+                                 <% } else { %>
+                                    <div class="my-1 mx-1">
+                                        <p>No Data Found 😲</p>
+                                     </div>  
+                            <% } %>
+                                              
+                        <% }) %>
+                        
+                    
                 </div>
              </div>
            
