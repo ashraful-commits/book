@@ -1,5 +1,5 @@
 <div class="container w-full h-96 bg-gray-200 flex">
-    <div class="h-full w-1/12 hover:w-6/12 transition-all bg-amber-600">
+    <div class="h-full w-1/12 hover:w-6/12 transition-all bg-lime-600">
        <%- include("layouts/menu.ejs")  %> 
     </div>
     <div class="h-full w-full p-2 bg-white text-center">
@@ -9,7 +9,7 @@
              <h1 class="text-xl font-bold my-1">Upload Gallery</h1>
         <% } %>
         <!-- gallery viewport -->
-      <div  class="flex flex-wrap justify-evenly w-full h-60 gallery_view overflow-hidden">
+      <div  class="flex flex-wrap justify-start w-full h-60 gallery_view overflow-hidden">
        <% user.gallery.forEach(element => { %>
          <div class="w-3/12 h-16 mx-1 my-2 border-2 border-black overflow-hidden">
             <img src="/gallery/<%= element %>" alt="">

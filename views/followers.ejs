@@ -1,0 +1,57 @@
+<div class="container w-full h-96 bg-gray-200 flex">
+    <div class="h-full w-1/12 hover:w-6/12 transition-all bg-lime-600">
+       <%- include("layouts/menu.ejs")  %> 
+    </div>
+    <div class="h-full w-full bg-white text-center">
+        <% if (message) { %>
+            <p class="w-full  font-bold placeholder-amber-900 focus:outline-none px-3  "><%= message %> </p>
+            <% } else { %>
+                <h1 class="text-xl font-bold my-1 text-xl bg-black text-white">Profile</h1>
+           <% } %>
+       
+             <div class="px-3">
+                <div class="flex items-center">
+                    <% if (profile) { %>
+                        <img class="w-16 h-16 rounded-full" src="/gallery/<%= profile.photo %> " alt="">
+                        <% } else { %>
+                            <img class="w-16 h-16 rounded-full" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="">
+                    <% } %>
+                    
+                    <div class="flex flex-col px-3">
+                        <% if (profile) { %>
+                            <span class="text-lg text-red-500 font-bold "><%= profile.name %> </span>
+                            <span class="text-amber-900 font-bold"><%= profile.email %> </span>
+                            <% } else { %>
+                                <span class="text-lg text-red-500 font-bold ">User name </span>
+                                <span class="text-amber-900 font-bold"> example@gmail.com </span>
+                        <% } %>
+                      
+                       <div class="flex">
+                        <% if (profile) { %>
+                            <a href="/followers/<%= profile._id %>" class="px-1 bg-amber-200 mx-1 border-gray-400 border-2 text-red-900"><%= profile.followers.length %> Followers </a>
+                            <a href="/following/<%= profile._id %>" class=" bg-amber-200 px-1 border-2 border-gray-400 text-red-900"><%= profile.following.length %> Following</a>
+                            <% } else { %>
+                                <a href="" class="px-1 bg-amber-200 mx-1 border-gray-400 border-2 text-red-900">0 Followers </a>
+                               <a href="" class=" bg-amber-200 px-1 border-2 border-gray-400 text-red-900">0 Following</a>
+                        <% } %>
+                        
+                       </div>
+                    </div>
+                </div>
+                <p class="text-lg bg-black text-white my-2 text-center">Followers Friends</p>
+                <% profile.followers.forEach(element => { %>
+                    <div class="flex items-center border-2 border-gray-400 bg-lime-400  my-1 mx-2 rounded-lg">
+                        <div class="user_profile p-3 ">
+                            <img class="w-12 h-10 rounded-full border-2 border-white" src="/gallery/<%= element.photo %> " alt="">
+                        </div>
+                        <div class="w-full">
+                            <p class="text-lg font-bold"><%= element.name %>  </p>
+                            <a class="bg-black text-white px-2 py-1 hover:bg-gray-200 hover:text-black font-bold uppercase" href="">Add Friend</a>
+                        </div>
+                    </div>
+                <% }) %>
+           
+        
+    </div>
+    </div>
+    </div>

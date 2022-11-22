@@ -3,11 +3,13 @@
 
 
 <div class="w-full h-auto mt-20 text-center">
+   
     <% if (user) { %>
         <h1 class="text-white font-bold text-xl my-2 "> <i class="fas fa-user"></i> <%= user.name %> </h1>
         <% } else { %>
             <h1 class="text-white font-bold text-xl my-2 "> <i class="fas fa-user"></i> Mohammad Ashraful Alam </h1>
     <% } %>
+   
     <% if (user) { %>
         <p class="text-white font-bold text-sm my-2 "> <i class="fas fa-envelope"></i>   <%= user.email %> </p>
         <% } else { %>
@@ -23,9 +25,19 @@
     <% } else { %>
         <p class="text-white font-bold text-sm my-2"> <i class="fa-solid fa-street-view"></i> Mirpur , Dhaka</p>
    <% } %>
- 
+   <% if (user) { %>
+    <div class="mt-5">
+        <span class="text-gray-400 bg-gray-800  p-3"><%= user.followers.length %>  Followers</span>
+        <span class="text-gray-400 bg-gray-800 p-3"><%= user.following.length %>  Following</span>
+    </div>
+    <% } else { %>
+        <div class="mt-5">
+            <span class="text-gray-400 bg-gray-800 p-3">0 Followers</span>
+            <span class="text-gray-400 bg-gray-800 p-3">0 Following</span>
+        </div>
+<% } %>
     
 </div>
-<div class="mt-10 mb-32 text-center">
+<div class="mt-9 mb-32 text-center">
     <a class="w-32 px-10 py-5 h-12 uppercase text-white bg-gray-800 hover:bg-white hover:text-purple-900 font-bold rounded-md" href="/photo">Go</a>
 </div>

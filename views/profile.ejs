@@ -1,0 +1,60 @@
+<div class="container w-full h-96 bg-gray-200 flex">
+    <div class="h-full w-1/12 hover:w-6/12 transition-all bg-lime-600">
+       <%- include("layouts/menu.ejs")  %> 
+    </div>
+    <div class="h-full w-full bg-white text-center">
+        <% if (message) { %>
+            <p class="w-full  font-bold placeholder-amber-900 focus:outline-none px-3  "><%= message %> </p>
+            <% } else { %>
+                <h1 class="text-xl font-bold my-1 text-xl bg-black text-white">Profile</h1>
+           <% } %>
+       
+             <div class="px-3 text-start">
+                <div class="flex items-center ">
+                    <% if (profile) { %>
+                        <img class="w-16 h-16 rounded-full" src="/gallery/<%= profile.photo %> " alt="">
+                        <% } else { %>
+                            <img class="w-16 h-16 rounded-full" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="">
+                    <% } %>
+                    
+                    <div class="flex flex-col px-3">
+                        <% if (profile) { %>
+                            <span class="text-lg text-red-500 font-bold "><%= profile.name %> </span>
+                            <span class="text-amber-900 font-bold"><%= profile.email %> </span>
+                            <% } else { %>
+                                <span class="text-lg text-red-500 font-bold ">User name </span>
+                                <span class="text-amber-900 font-bold"> example@gmail.com </span>
+                        <% } %>
+                      
+                       <div class="flex">
+                        <% if (profile) { %>
+                            <a href="/followers/<%= profile._id %> " class="px-1 bg-lime-200 mx-1 border-gray-400 border-2 text-red-900"><%= profile.followers.length %> Followers </a>
+                            <a href="/following/<%= profile._id %>" class=" bg-lime-200 px-1 border-2 border-gray-400 text-red-900"><%= profile.following.length %> Following</a>
+                            <% } else { %>
+                                <a href=" " class="px-1 bg-amber-200 mx-1 border-gray-400 border-2 text-red-900">0 Followers </a>
+                               <a href="" class=" bg-amber-200 px-1 border-2 border-gray-400 text-red-900">0 Following</a>
+                        <% } %>
+                        
+                       </div>
+                    </div>
+                </div>
+                <p class="text-lg bg-black text-white my-2 text-center">Gallery</p>
+                
+                <div class="flex flex-wrap justify-center">
+                    <% profile.gallery.forEach(element => { %>
+                     <% if (element) { %>
+                        <div class="my-1 mx-1">
+                            <img class="w-16 h-16 border-2 border-amber-400" src="/gallery/<%= element %> " alt="">
+                         </div>
+                        <% } else { %>
+                            <div class="my-1 mx-1">
+                               <p>Gallery Photo Not Found</p>
+                             </div>
+                     <% } %>
+                    <% }) %>
+                </div>
+             </div>
+           
+        
+    </div>
+    </div>

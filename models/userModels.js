@@ -44,6 +44,14 @@ const userSchema = mongoose.Schema(
       type: Array,
       trim: true,
     },
+    followers: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'registration',
+    },
+    following: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'registration',
+    },
   },
   { timestamps: true }
 );

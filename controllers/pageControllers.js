@@ -167,14 +167,14 @@ export const uploadphotopage = async (req, res) => {
 //===========================================gallery upload
 export const gallerypageUpload = async (req, res) => {
   try {
-    for (let i = 0; i < req.files.length; i++) {
-      await useModel.findByIdAndUpdate(req.session.user._id, {
-        $push: {
-          gallery: req.files[i].filename,
-        },
-      });
-    }
-
+    let file_arr = [];
+    req.files.forEach((element) => {
+      file_arr.push(element.filename);
+      req.session.user.gallery.push(element.filename);
+    });
+    await useModel.findByIdAndUpdate(req.session.user._id, {
+      $push: { gallery: { $each: file_arr } },
+    });
     validator('Gallary upload successfull', '/gallery', req, res);
   } catch (error) {
     validator(error.message, '/gallery', req, res);
@@ -196,13 +196,13 @@ export const passwordpageChange = async (req, res) => {
             password: await makeHash(new_pass),
           });
           res.clearCookie('authToken');
-          validator('Upadated password', '/login', req, res);
+          validator('Updated password', '/login', req, res);
         } else {
           validator('Not your password', '/password', req, res);
         }
       } else {
         validator(
-          'new and Confirm pass not match',
+          'New and Confirm pass not match',
           '/password',
           req,
           res
@@ -218,8 +218,6 @@ export const editpagepost = async (req, res) => {
   try {
     const { name, email, username, cell, location, gender } =
       req.body;
-    console.log(req.body);
-
     const user = req.session.user;
 
     const updata = await useModel.findByIdAndUpdate(user._id, {
@@ -232,8 +230,103 @@ export const editpagepost = async (req, res) => {
     });
     res.clearCookie('authToken');
     req.session.user = updata;
-    validator('updated Succesfull', '/login', req, res);
+    validator('Updated Succesfully', '/login', req, res);
   } catch (error) {
     validator(error.message, '/edit', req, res);
   }
+};
+//===================================================> profie
+export const profilePage = (req, res) => {
+  const profile = req.session.user;
+  res.render('profile', {
+    profile,
+  });
+};
+//===================================================> profie
+export const friendsPage = async (req, res) => {
+  const allFriends = await useModel
+    .find()
+    .where('email')
+    .ne(req.session.user.email);
+  res.render('friends', {
+    friends: allFriends,
+  });
+};
+//==================================================== follow
+export const followPage = async (req, res) => {
+  const { id } = req.params;
+  await useModel.findByIdAndUpdate(req.session.user._id, {
+    $push: {
+      following: id,
+    },
+  });
+  await useModel.findByIdAndUpdate(
+    { _id: id },
+    {
+      $push: {
+        followers: req.session.user._id,
+      },
+    }
+  );
+
+  req.session.user.following.push(id);
+  validator('Follower Add successful', '/friends', req, res);
+};
+//==================================================== unfollow
+export const unfollowPage = async (req, res) => {
+  const { id } = req.params;
+  await useModel.findByIdAndUpdate(
+    { _id: id },
+    {
+      $pull: {
+        followers: req.session.user._id,
+      },
+    }
+  );
+  await useModel.findByIdAndUpdate(req.session.user._id, {
+    $pull: {
+      following: id,
+    },
+  });
+  const updateFollowing = req.session.user.following.filter(
+    (data) => {
+      data._id != id;
+    }
+  );
+  req.session.user.following = updateFollowing;
+  validator('Unfollowed successful', '/friends', req, res);
+};
+//========================================================== profile show
+export const showProfilePage = async (req, res) => {
+  const { id } = req.params;
+  const profileData = await useModel.findById({ _id: id });
+  req.session.profile = profileData;
+  res.render('profile', {
+    profile: profileData,
+  });
+};
+
+//=========================following
+export const followingPage = async (req, res) => {
+  const { id } = req.params;
+  const followeringData = await useModel
+    .findById({ _id: id })
+    .populate('following');
+  req.session.profile = followeringData;
+
+  res.render('following', {
+    profile: followeringData,
+  });
+};
+//=========================followers
+export const followersPage = async (req, res) => {
+  const { id } = req.params;
+  const followersData = await useModel
+    .findById({ _id: id })
+    .populate('followers');
+  req.session.profile = followersData;
+
+  res.render('followers', {
+    profile: followersData,
+  });
 };

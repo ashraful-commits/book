@@ -17,6 +17,13 @@ import {
   gallerypageUpload,
   passwordpageChange,
   editpagepost,
+  profilePage,
+  friendsPage,
+  followPage,
+  unfollowPage,
+  showProfilePage,
+  followingPage,
+  followersPage,
 } from '../controllers/pageControllers.js';
 import { photoMulter } from '../middlewares/multer.js';
 import { galleryPhoto } from '../middlewares/multer.js';
@@ -42,3 +49,10 @@ router.get('/password', loginUserRedicet, passwordpage);
 router.post('/password', passwordpageChange);
 router.get('/active/:token', activeAccount);
 router.get('/logout', logoutAction);
+router.get('/profile', loginUserRedicet, profilePage);
+router.get('/profile/:id', loginUserRedicet, showProfilePage);
+router.get('/friends', loginUserRedicet, friendsPage);
+router.get('/follow/:id', loginUserRedicet, followPage);
+router.get('/unfollow/:id', loginUserRedicet, unfollowPage);
+router.get('/following/:id', loginUserRedicet, followingPage);
+router.get('/followers/:id', loginUserRedicet, followersPage);

@@ -1,0 +1,37 @@
+<div class="container w-full h-96 bg-gray-200 flex">
+    <div class="h-full w-1/12 hover:w-6/12 transition-all bg-lime-600">
+       <%- include("layouts/menu.ejs")  %> 
+    </div>
+    <div class="h-full w-full bg-white text-center">
+        <% if (message) { %>
+            <p class="w-full  font-bold placeholder-amber-900 focus:outline-none px-3  "><%= message %> </p>
+            <% } else { %>
+                <h1 class="text-xl font-bold my-1">Friends</h1>
+           <% } %>
+      <% friends.forEach(element => { %>
+        <% if (element) { %>
+            <div class="flex justify-start items-center border-2 border-gray-400 bg-amber-400  my-1 mx-2 rounded-lg">
+                <div class="user_profile p-3 text-left w-2/12">
+                  <a href="/profile/<%= element._id %> ">
+                    <img class="w-12 h-12 rounded-full border-2 border-white" src="/gallery/<%= element.photo %> " alt="">
+                  </a>
+                </div>
+                <div class="w-full">
+                    <p class="text-lg font-bold"><%= element.name %> </p>
+                   <% let follow = user.following.some((data)=> data == element._id) %> 
+                   <% if (follow) { %>
+                    <a class="bg-black text-white px-2 py-1 hover:bg-gray-200 hover:text-black font-bold uppercase" href="/unfollow/<%= element._id %>">Unfollow</a>
+                    <% } else { %>
+                        <a class="bg-black text-white px-2 py-1 hover:bg-gray-200 hover:text-black font-bold uppercase" href="/follow/<%= element._id %>">Follow</a>
+                   <% } %>
+                    
+                   
+                </div>
+            </div>
+            <% } else { %>
+             <p>No Friend Found</p>
+           <% } %>
+           
+      <% }) %>
+    </div>
+    </div>
